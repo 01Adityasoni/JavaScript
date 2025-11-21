@@ -14,7 +14,7 @@ let isLoggedIn = false // boolean data type true or false
 
 let bigNumber = 1234567890123456789012345678901234567890n // BigInt data type we use n at the end of the number to tell js that it is a bigint 
 
-// null data type .. it is a standalone value that represents "no value" or "empty value"
+// null data type .. it is a standalone value that represents "no value" or "empty value" it does not means 0 it is also a type of object 
 
 let nullVar = null
 
@@ -32,3 +32,50 @@ let sym2 = Symbol("id")
 console.log(typeof null); // it shows object because of a bug in js it should be null  but it shows object
 
 console.log(typeof undefined); // it shows undefined 
+
+
+
+//*******PRIMITIVE DATA TYPES (call by value copy creation)********************************
+
+// 7 types 
+// 1. string
+// 2. number
+// 3. boolean
+// 4. bigint
+// 5. null
+// 6. undefined
+// 7. symbol
+
+
+//******NON PRIMITIVE DATA TYPES (call by reference adddress pass )********************************
+
+// 1. object
+// 2. array
+// 3. function
+
+
+// array
+const heros = ["Aditya" , "Rohit" , "Harsh"];
+console.log("i am printing array")
+console .log(typeof heros);// it gives object because array is also a type of object in javascript
+// object
+
+// always use key value pairs and curly braces to create object
+let myObj = {
+    name: "Aditya",
+    age: 23,
+}
+console.log(typeof myObj);
+
+// function 
+// functions are also objects in javascript because they have properties and methods 
+
+const myFunction = function(){
+    console.log("hello world")
+}
+console.log(typeof myFunction);//it is a object function 
+
+
+
+
+// javaScript is a dynamically typed language means we dont have to specify data type of variable it automatically detects it .
