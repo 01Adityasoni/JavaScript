@@ -45,3 +45,29 @@ console.log("C " , myArr); // original array is modified
 // slice does not modify original array, splice modifies original array
 
 
+const marvel_heros = ["thor" , "ironman" , "spiderman"]
+const dc_heros = ["batman" , "superman" , "flash"  ]
+
+//marvel_heros.push(dc_heros) // adds dc_heros array as a single element at the end of marvel_heros
+//console.log(marvel_heros);
+//console.log("hello")
+
+console.log("printing concat")
+const allHeros = marvel_heros.concat(dc_heros) // merges dc_heros array with marvel_heros and returns a new array
+console.log(allHeros);
+
+
+const newHeros = [...marvel_heros , ...dc_heros ] // spread operator to merge two arrays
+console.log(newHeros);
+
+
+console.log(Array.isArray("Aditya"))// checks if the given variable is an array or not
+console.log(Array.from("Aditya")) // converts string to array of characters
+console.log(Array.from({name:"Aditya"}))// converts object to array (only keys are taken)
+
+let score1 = 100;
+let score2 = 200;
+let score3 = 300;
+
+console.log(Array.of(score1,score2,score3)) // creates an array from the given arguments
+
