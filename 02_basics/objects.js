@@ -1,7 +1,7 @@
-//Singleton 
-
 
 // object literal
+//An object is a container where you store data in the form:
+// key: value pairs
 // in object there are key value pairs
 
 const mySym = Symbol("key1");
@@ -35,3 +35,59 @@ JsUser.greeting2 = function(){
 
 console.log(JsUser.greeting());
 console.log(JsUser.greeting2());
+
+
+// singleton objects
+
+const tinderUser = new Object();// object constructor
+tinderUser.name = "Rocky";
+tinderUser.age = 22;
+tinderUser.isLoggedIn = false;
+console.log(tinderUser);
+
+// nested objects
+const regularUser = {
+    email: "abc@123",
+    fullname:{
+        userfullname:{
+            firstname: "John",
+            lastname: "Doe"
+
+        }
+    }
+}
+console.log(regularUser.fullname.userfullname.firstname)
+
+// object assign 
+const obj1 = { key1: "value1",
+    key2: "value2"
+};
+const obj2 = { key3: "value3"
+};
+const newObj = Object.assign({}, obj1, obj2);
+console.log(newObj);
+
+//spread operator
+const newObj2 = {...obj1, ...obj2};
+console.log(newObj2);
+
+
+const users = [
+    {
+        userId: 1,
+        userName: "aditya"
+    },
+    {
+        userId: 2,
+        userName: "harsh"
+    }
+]
+console.log(users[1].userName);
+
+console.log(Object.keys(tinderUser));// to get all keys of object
+console.log(Object.values(tinderUser));
+console.log(Object.entries(tinderUser));// to get key value pairs as array of arrays
+
+console.log(tinderUser.hasOwnProperty("name"));// to check if object has specific key or not    
+
+
