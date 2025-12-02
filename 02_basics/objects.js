@@ -6,7 +6,7 @@
 
 const mySym = Symbol("key1");
 
-const JsUser = {
+const JsUser = { //  object declaration
     name: "Aditya",
     "full name": " Aditya Soni",
     [mySym]: "mykey1",//symbol syntax
@@ -90,4 +90,18 @@ console.log(Object.entries(tinderUser));// to get key value pairs as array of ar
 
 console.log(tinderUser.hasOwnProperty("name"));// to check if object has specific key or not    
 
+
+// de-structuring objects
+const course = {
+    coursename: "javascript",
+    price: 999,
+    courseInstructor: "Simran"
+}
+const {courseInstructor: instructor} = course;
+console.log(instructor);
+
+
+// JSON = JavaScript Object Notation
+// used to send data to server and receive data from server
+// it is in string format   
 
