@@ -60,4 +60,34 @@ console.log(UserLoginMessage("Aditya")); // Aditya just logged in
 console.log(UserLoginMessage());// undefined just logged in because username is undefined
 
 
+// function to add items in a cart 
+function calculateCartPrice(...num1)// rest operator to take multiple arguments . rest is used to take multiple arguments as an array
+{
+    return num1;
+}
 
+console.log(calculateCartPrice(200,400,500));
+
+// pass object to a function 
+const user ={
+    username: "Rishabh",
+    price: 5000
+}
+
+function handleObject(anyobject){
+    console.log(`username is ${anyobject.username} and price is ${anyobject.price}`);
+}
+
+handleObject(user);
+
+handleObject({ // sending object directly 
+    username: "Aditya",
+    price: 7000
+})
+
+const myNewArray = [2000,400,6000,8000];
+function returnSecondValue(getArray){
+    return getArray[1];
+}
+console.log(returnSecondValue(myNewArray)); // 400
+console.log(returnSecondValue([100,200,300,400])); // 200
