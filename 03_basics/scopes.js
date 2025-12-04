@@ -22,5 +22,16 @@ console.log(f); // f is defined because var is function scoped not block scoped
 // nested scope   
 
 
+function one(){ // parent function 
+   const username ="john doe";
+   console.log(username);
 
+   function two(){ // nested function or child function // child functions are able to access parent function variables
+      const website ="youtube";
+      console.log(username);
+   }
+  // console.log(website); // not accessible here because it is in nested function scope
+   two();
+}
+one();
 
