@@ -35,3 +35,30 @@ function one(){ // parent function
 }
 one();
 
+
+if(true){
+   const fruit ="mango";
+   if( fruit === "mango"){
+      const vegetable ="broccoli";
+      console.log(fruit + " and " + vegetable);
+}
+//console.log(vegetable); // not accessible here because it is in nested block scope
+}
+
+//console.log(fruit); // not accessible here because it is in block scope
+
+
+
+
+console.log(addone(5));// this will work because function declaration is hoisted and it is called hoisting means moving function declaration to the top of the scope
+
+
+function addone(num){
+   return num + 1;
+}
+
+
+addthree(5); // this will give error because function declaration is hoisted but function expression is not hoisted
+const addthree = function(num){
+   return num + 3;
+}
