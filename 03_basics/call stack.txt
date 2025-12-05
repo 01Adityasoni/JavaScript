@@ -1,0 +1,165 @@
+IN JavaScript call stack works in the principle of LIFO (LAST IN FIRST OUT) , The call stack is where JavaScript keeps track of which function is running and which function to return to after completion using the LIFO principle.
+
+function one(){
+    console.log("one")
+    two()
+}
+function two(){
+    console.log("two")
+    three()
+}
+function three(){
+    consolr.log("three")
+}
+one()
+two()
+three()
+
+
+
+
+
+
+
+
+
+
+
+🔥 What is Call Stack?
+
+The call stack is like a stack of plates.
+
+➡ The last function added (top plate)
+➡ Is the first one removed.
+
+JavaScript uses this stack to keep track of function execution.
+
+⭐ Let’s use your example 
+
+You wrote:
+
+function one(){
+    console.log("one")
+    two()
+}
+
+function two(){
+    console.log("two")
+    three()
+}
+
+function three(){
+    console.log("three")
+}
+
+one()
+two()
+three()
+
+
+⭐ How Call Stack works step-by-step
+🔹 Step 1: Program starts
+
+➡ Global Execution Context is put on stack
+
+🔹 Step 2: one() is called
+
+Stack becomes:
+
+| one() |
+| Global |
+
+
+Inside one():
+
+It prints "one"
+
+Then calls two()
+
+🔹 Step 3: two() is called from inside one()
+
+Stack becomes:
+
+| two() |
+| one() |
+| Global |
+
+
+Inside two():
+
+It prints "two"
+
+Then calls three()
+
+🔹 Step 4: three() is called
+
+Stack now:
+
+| three() |
+| two()   |
+| one()   |
+| Global  |
+
+
+Inside three():
+
+It prints "three"
+
+Now execution finishes → three() removed from stack
+
+| two()   |
+| one()   |
+| Global  |
+
+
+Then two() finishes → removed
+
+| one()   |
+| Global  |
+
+
+Then one() finishes → removed
+
+| Global  |
+
+⭐ Next line in program: two() (this is outside previous call)
+
+So stack becomes:
+
+| two()   |
+| Global  |
+
+
+It prints "two", calls three() again:
+
+| three() |
+| two()   |
+| Global  |
+
+
+three() runs, prints "three" and pops off:
+
+| two()   |
+| Global  |
+
+
+two() completes → removed
+
+| Global  |
+
+⭐ Final call: three()
+| three() |
+| Global  |
+
+
+Three prints "three" → removed
+
+| Global |
+
+✨ Final output order printed in console:
+one
+two
+three
+two
+three
+three
