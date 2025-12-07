@@ -33,3 +33,14 @@ console.log(`value of i is ${i}`)
 
 
 
+for(let i=1; i<=20; i++){
+    if(i == 5){
+        console.log(`detected ${i}`);
+        
+        continue; // skips the current iteration when i is 5
+    }
+console.log(`value of i is ${i}`)
+}
+
+
+
