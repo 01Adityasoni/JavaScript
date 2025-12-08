@@ -74,3 +74,34 @@ for(const index in mystring){
 
 
 /// FOR EACH LOOP 
+
+const array = [10,20,30,40,50];
+array.forEach(function(item) {
+    console.log(item);
+})
+
+const brr = ['x', 'y', 'z'];
+brr.forEach( (item) => {
+    console.log(item);
+})
+
+
+// for each with objects inside array
+const myCoading = [
+    {
+        name : "JavaScript",
+        difficulty : "Hard"
+    },
+    {
+        name : "Python",
+        difficulty : "Easy"
+    },
+    {
+        name : "Ruby",
+        difficulty : "Medium"
+    }   
+]
+
+myCoading.forEach( (item) => {
+    console.log(`Language is ${item.name} and difficulty is ${item.difficulty}`);
+})
