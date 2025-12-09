@@ -205,4 +205,24 @@ console.log(newNum); // [22,24]
 
 // reduce method
 
+const values = [1,2,3,4,5];
+const sum = values.reduce(function (accumulator , currentValue) {
+    console.log(`accumulator is ${accumulator} and currentValue is ${currentValue} and sum is ${accumulator + currentValue}`);
+    return accumulator + currentValue;
+} , 0); // 0 is the initial value of accumulator
+
+console.log(`Sum is ${sum}`); // Sum is 15
+
+
+const ShoppingCart = [
+    { product : "Laptop" , price : 50000 },
+    { product : "Phone" , price : 20000 },
+    { product : "Tablet" , price : 15000 },
+    { product : "Monitor" , price : 10000 }
+];
+
+const totalAmount = ShoppingCart.reduce((acc,item) => acc + item.price,0);
+
+console.log(`Total Amount is ${totalAmount}`); // Total Amount is 95000
+
 
