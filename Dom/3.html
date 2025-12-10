@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Dom</title>
+</head>
+<body style="background-color: black; color: white;">
+    <ul class="language">
+        <li class="java">Java</li>
+    </ul>
+</body>
+<script>
+    // adding new list item using innerHTML method by function
+    function addLanguage(langName){
+        const li = document.createElement('li');
+        li.innerHTML = `${langName}`;
+        document.querySelector('.language').appendChild(li);
+    }
+    addLanguage('Python');
+    addLanguage('C++');
+
+//optimized version
+    function addoptiLanguage(langName){
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(langName));
+        document.querySelector('.language').appendChild(li);
+    }
+
+    addoptiLanguage('JavaScript');
+
+
+    //edit list item .. replace second item with new item 
+    const secondLang = document.querySelector("li:nth-child(2)");
+   // secondLang.innerHTML = 'Ruby';
+    const newli = document.createElement('li');
+    newli.textContent = 'Ruby';
+    secondLang.replaceWith(newli);
+
+    // second way to edit list item .. replace first item with new item
+
+    const firstLang = document.querySelector("li:first-child");
+    firstLang.outerHTML = '<li>GOLANG</li>';
+
+
+// remove list item .. remove third item
+    const thirdLang = document.querySelector("li:nth-child(3)");
+    thirdLang.remove();
+
+
+
+</script>
+</html>
