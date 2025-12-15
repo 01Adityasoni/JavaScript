@@ -1,0 +1,201 @@
+ASYNC = ASYNCHRONOUS 
+
+Javascript is a synchronous and single threaded language means it executes line by line and one task at a time i runs in a single thread by default 
+each operation waits for the last one to complete before execution 
+
+
+BLOCKING CODE vs NON-BLOCKING CODE 
+
+Blocking code --> block the flow of program , read file sync . means it blocks the code until it reads the file 
+
+
+
+
+Non-Blocking-code --> Does not block execution  , read file async . means it does not blocks the code while reading the file 
+
+Why JavaScript needs async?
+
+JavaScript runs in:
+
+Browser (UI must not freeze)
+
+Server (Node.js handles many users)
+
+If JS was only blocking:
+
+Website would freeze 😵
+
+Server would stop responding
+
+How JavaScript handles async internally (important concept)
+
+Even though JS is single-threaded, it uses:
+
+🔹 Web APIs (Browser / Node.js)
+
+setTimeout
+
+fetch
+
+file system
+
+promises
+
+🔹 Event Loop
+
+Checks when async task is finished
+
+Pushes it back to the call stack
+
+You don’t need to memorize this now, just understand the idea 👍
+
+Why do we need the Event Loop?
+
+JavaScript can do only one thing at a time.
+
+But we use:
+
+setTimeout
+
+fetch
+
+Promises
+
+API calls
+
+These are slow tasks.
+
+Without the Event Loop:
+
+JS would stop and wait ❌
+
+Website would freeze ❌
+
+So the Event Loop helps JS stay fast and non-blocking.
+
+Main parts involved (very important)
+1️⃣ Call Stack
+2️⃣ Web APIs
+3️⃣ Callback Queue (Task Queue)
+4️⃣ Microtask Queue
+5️⃣ Event Loop
+
+Let’s understand each one simply.
+
+1️⃣ Call Stack
+
+Executes JavaScript code
+
+Works in LIFO (Last In, First Out)
+
+One function at a time
+
+Example:
+
+function a() {
+  b();
+}
+function b() {
+  console.log("Hello");
+}
+a();
+
+
+Execution order:
+
+a() → stack
+
+b() → stack
+
+console.log() → stack
+
+Stack becomes empty
+
+2️⃣ Web APIs
+
+These are provided by browser / Node.js, not JS itself.
+
+Examples:
+
+setTimeout
+
+fetch
+
+DOM events
+
+File system
+
+They handle async work in the background.
+
+3️⃣ Callback Queue (Macrotask Queue)
+
+Stores callbacks like:
+
+setTimeout
+
+setInterval
+
+DOM events
+
+4️⃣ Microtask Queue (Very Important ⭐)
+
+Higher priority than callback queue
+
+Stores:
+
+Promise.then
+
+catch
+
+finally
+
+queueMicrotask
+
+5️⃣ Event Loop (The Manager)
+
+The Event Loop:
+
+Checks if Call Stack is empty
+
+First executes Microtask Queue
+
+Then executes Callback Queue
+
+Repeats this forever 🔁
+
+Example (MOST IMPORTANT)
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout");
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("Promise");
+});
+
+console.log("End");
+
+Output:
+Start
+End
+Promise
+Timeout
+
+Why?
+
+Step by step:
+
+console.log("Start") → Call Stack
+
+setTimeout → Web API → Callback Queue
+
+Promise.then → Microtask Queue
+
+console.log("End") → Call Stack
+
+Call Stack empty
+
+Event Loop runs Microtasks first → "Promise"
+
+Then Callback Queue → "Timeout"
