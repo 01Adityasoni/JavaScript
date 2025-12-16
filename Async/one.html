@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Async Example</h1>
+    <button id="stop">Stop</button>
+    
+</body>
+<script>
+ //   setTimeout(function(){ // clearTimeout , setInterval , clearInterval these are all async functions 
+   //     alert("Hello World")
+    // }, 2000) // Show alert after 2 seconds
+
+
+    const sayAditya = function(){
+        alert("Aditya");
+    }
+
+    const changeText = function(){
+        document.querySelector('h1').innerHTML = "Hello Aditya";
+    }
+
+
+    setTimeout(sayAditya, 3000); // Show alert after 3 seconds
+    setTimeout(changeText, 5000); // Change text after 5 seconds
+</script>
+</html>
