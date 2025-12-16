@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async 2</title>
+</head>
+<body>
+    <h1>Async Two</h1>
+    <button id="stop">Stop</button>
+    <button id="start">Start</button>
+    
+</body>
+<script>
+     //setInterval(function(){ // repeat the function every 2 seconds
+       // alert('Hello from async two!'); 
+    //}, 2000);
+
+
+
+   // const sayDate = function(str) {
+     //   console.log(str , Date.now());
+    //}
+
+    //const intervalId = setInterval(sayDate, 2000 , "hi");
+
+    //clearInterval(intervalId); // to stop the interval 
+
+const start = document.getElementById('start');
+const stop = document.getElementById('stop');
+// log message every 2 seconds when click on start button
+// stop logging message when click on stop button   
+start.addEventListener('click' , function() {
+    intervalStart = setInterval(function() {
+        console.log('Hello Aditya Interval is started' , Date.now());
+    } , 2000)
+})
+
+
+stop.addEventListener('click' , function() {
+    intervalStop = clearInterval(intervalStart);
+    alert('Interval is stopped now');
+})
+
+// generate random color 
+// when click on start button change background color every 2 seconds
+// when click on stop button stop changing background color
+
+const randomColor = function(){
+const hex = "0123456789ABCDEF";
+let color = '#';
+for( let i=0; i < 6; i++){
+    color += hex[Math.floor(Math.random() * 16)];
+}
+return color;
+};
+
+start.addEventListener('click' , function() {
+    intervalStart = setInterval(function() {
+        document.body.style.backgroundColor = randomColor();
+        console.log('Background color changed' , Date.now());
+    } , 2000)
+})
+
+stop.addEventListener('click' , function() {
+    intervalStop = clearInterval(intervalStart);
+    alert('Interval is stopped now');
+})
+
+
+
+
+</script>
+</html>
