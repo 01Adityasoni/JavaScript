@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: darkslategrey; color: white;">
+    <p>API Request Example Using Old XMLHttpRequest related to AJAX</p>
+    <p> In XMLHttpRequest, we create an instance of the XMLHttpRequest object and use its methods to send and receive data asynchronously.</p>
+    <p>Methods of XMLHttpRequest</p>
+    <p>0. UNSENT - Client has been created. open() not claaed yet.</p>
+    <p>1. OPENED - open() has been called.</p>
+    <p>2. HEADERS_RECEIVED - send() has been called, and headers and status are available.</p>
+    <p>3. LOADING - Downloading; responseText holds partial data.</p>
+    <p>4. DONE - The operation is complete.</p>
+    <p>Here we are using github api to show the user details in console</p>
+
+    <p>run this page using golive and check the console for response</p>
+
+</body>
+<script>
+// Step 1: Define the API endpoint URL
+const url = 'https://api.github.com/users/01Adityasoni';
+
+    //then create a object of XMLHttpRequest
+    const xhr = new XMLHttpRequest();
+    // use open to specify the type of request and the url and send the request
+    xhr.open('GET', url);
+    console.log(xhr.readyState); // should be 1 (OPENED)
+    xhr.onreadystatechange = function(){ // event listener for readystatechange event there are 5 readyStates or methods as mentioned above 
+        console.log(xhr.readyState); // log the readyState changes
+        if(xhr.readyState === 4){ // check if the request is complete (DONE) 
+            const data = JSON.parse(xhr.responseText);// parse the JSON response . data is in string format so we need to convert it into object using JSON.parse
+            console.log(data); // log the response data
+            console.log(typeof data); // log the type of data
+            console.log('User Name:' , data.name)// log specific details from the response data
+            console.log('User Bio:' , data.bio)
+        }
+    }
+    // use send to send the request to the server
+    xhr.send();
+
+</script>
+</html>
