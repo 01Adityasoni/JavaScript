@@ -1,0 +1,274 @@
+Big picture (remember this first)
+
+fetch() works in TWO BIG PHASES:
+
+Promise creation phase (JavaScript side)
+
+Network request phase (Browser side)
+
+JavaScript does NOT do the network request itself.
+The browser does it.
+
+Simple fetch code
+fetch("https://api.example.com/data")
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.log(error));
+
+
+Now let’s break everything step by step 👇
+
+🧠 STEP 1: JavaScript runs fetch()
+Call Stack
+fetch("url")
+
+
+JS engine (V8) sees fetch
+
+fetch is a Web API, not pure JS
+
+JS sends this work to the browser
+
+✅ Immediately returns a Promise
+
+Promise { <pending> }
+
+
+📌 Important
+
+fetch() does NOT block
+It returns a Promise instantly
+
+🧠 STEP 2: Promise object is created (VERY IMPORTANT)
+
+When fetch() is called:
+
+Promise is created with:
+- state: pending
+- result: undefined
+
+
+Internally, browser prepares TWO internal lists (arrays):
+
+Internal promise reactions (not real arrays, but conceptually)
+Fulfillment handlers list → .then()
+Rejection handlers list   → .catch()
+
+
+So when you write:
+
+.then(...)
+.catch(...)
+
+
+JS is doing this:
+
+onFulfilled[] = [then callbacks]
+onRejected[]  = [catch callbacks]
+
+
+⚠️ Nothing runs yet.
+
+🌐 STEP 3: Browser starts NETWORK REQUEST
+
+Now browser takes over:
+
+Browser components involved
+
+Network thread
+
+DNS
+
+TCP
+
+HTTP
+
+Browser does:
+
+DNS lookup
+
+TCP connection
+
+Send HTTP request
+
+Wait for response
+
+⏳ This can take 1 sec, 5 sec, or more
+
+Meanwhile…
+
+🧠 STEP 4: Event Loop keeps running
+
+JavaScript is free now.
+
+Event loop continues handling:
+
+Call stack
+
+Microtask queue
+
+Task queue
+
+❌ fetch is NOT blocking anything.
+
+🌐 STEP 5: Network response arrives
+
+Now two cases happen 👇
+
+✅ CASE 1: Request SUCCESS (HTTP response received)
+
+Browser does NOT put data directly into JS.
+
+Instead:
+
+Promise state changes:
+
+pending → fulfilled
+
+
+Response object is created:
+
+Response { body, headers, status, ok }
+
+
+.then() callbacks are queued into:
+
+MICROTASK QUEUE
+
+
+📌 Because Promise callbacks always go to microtask queue
+
+❌ CASE 2: Request FAILURE (network error)
+
+Example:
+
+No internet
+
+DNS fail
+
+CORS error
+
+Browser does:
+
+pending → rejected
+
+
+.catch() callbacks go to:
+
+MICROTASK QUEUE
+
+🔁 STEP 6: Event Loop executes microtasks
+
+Event loop rule:
+
+After call stack is empty → run ALL microtasks
+
+So:
+
+Call Stack empty
+↓
+Microtask Queue runs
+↓
+.then() or .catch() executes
+
+🔍 STEP 7: response.json() (SECOND ASYNC STEP)
+
+Very important point ❗
+This confuses many people.
+
+response.json()
+
+What happens?
+
+Response body is a stream
+
+Parsing JSON takes time
+
+So response.json() also returns a Promise
+
+Again:
+
+pending → fulfilled / rejected
+
+
+Again:
+
+.then() goes to microtask queue
+
+So fetch has TWO async layers:
+
+Network request
+
+Body parsing
+
+🔁 FULL FLOW (SHORT VERSION)
+fetch()
+↓
+Promise created (pending)
+↓
+Browser starts network request
+↓
+JS keeps running
+↓
+Network response arrives
+↓
+Promise fulfilled / rejected
+↓
+.then / .catch → microtask queue
+↓
+Event loop executes microtasks
+↓
+response.json() → new Promise
+↓
+Final data available
+
+📊 Visual mental model
+JS Call Stack
+    |
+    v
+fetch() ──▶ Browser Network
+    |
+    v
+Promise (pending)
+    |
+    v
+Network done
+    |
+    v
+Microtask Queue (.then / .catch)
+    |
+    v
+Call Stack
+
+⚠️ VERY IMPORTANT INTERVIEW POINT
+
+❌ fetch() reject does NOT mean HTTP error
+✅ fetch() reject means network error
+
+Example:
+
+fetch("url")
+
+Status	Promise
+200	fulfilled
+404	fulfilled
+500	fulfilled
+No internet	rejected
+
+You must check:
+
+if (!response.ok) throw error;
+
+✅ Simple final summary
+
+fetch() returns a Promise immediately
+
+Browser handles network
+
+Promise has fulfilled & rejected handlers
+
+.then() / .catch() go to microtask queue
+
+Event loop executes microtasks after call stack
+
+response.json() is another Promise
