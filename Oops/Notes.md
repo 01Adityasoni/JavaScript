@@ -4,6 +4,29 @@
 
 yes , js dose have classes , this feture introduced with the ECMAScript 2015 specification(often reffered to as ES6), However, its important to note that JavaScript is primarily a prototype-bases language,and its classes are primarily syntactuc suge over existing prototype-based inheritance machanisms. in other words, it provides a more familiar syntax for developers comming from class-based language such as java or cpp , but under the hood it works somwhat differently .. means it only synatx friendly with class but in background it is prototyped-based languag
 
+# Prototype Behaviour menas 
+
+javascript looks for properties in a object and its prototype chain , moving to parent object until it reaches to null (null means No more parent)
+JavaScript looks for a property or method step by step:
+first in the object itself
+then in its parent (prototype)
+then grandparent prototype
+and it stops only when it reaches null
+This is called the prototype chain.
+
+Step-by-step explanation (very simple)
+Consider this code:
+const obj = {
+  name: "Aditya"
+};
+Internally, JavaScript does this:
+obj → Object.prototype → null
+When you access a property
+console.log(obj.name);
+JavaScript checks:
+Does obj have name? ✅ YES → stop
+infact functions are also access through object but we are using it very rarely 
+
 # OOP(Object oriented programming) 
 Object-Oriented Programming (OOP) is a way of writing code by using objects, just like real-world things.
 Simple idea: Think about a Car 🚗
