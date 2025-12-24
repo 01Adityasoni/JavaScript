@@ -5,19 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REACT</title>
 </head>
-<body>
+<body style="background-color: darkgreen;">
+
     <button>Button clicked</button>
+    <p>When you use a class method as an event handler, JavaScript loses this.
+
+So we use .bind(this) to fix this.</p>
 </body>
 <script>
+
+    //You are creating a class named React (this is just a name, not real React).
     class React {
         constructor(){
-            this.liberary = "React",
+            //The constructor runs automatically when you create a new object using new React().
+            //Here you are creating properties on the object.
+            //So this means:
+            //Every object will have:
+            //library = "React"
+            //  server = "https://localhost:300"
+            this.library = "React",
             this. server = "https://localhost:300"
 
 
             //requirement 
 
             document.querySelector("button").addEventListener("click", this.handleClick.bind(this))
+
+          //  1️⃣ document.querySelector("button")
+
+             //Selects the button from HTML.
+
+            //2️⃣ addEventListener("click", ...)
+
+            //Runs a function when the button is clicked.
+
+        //  3️⃣ this.handleClick
+
+        //This is a method of the class.
+
+        //        ⚠️ Problem
+        //When JavaScript calls handleClick from an event,
+            //👉 this becomes the button, NOT the class object.
+            /*
+            Why bind(this) is needed
+this.handleClick.bind(this)
+
+
+bind(this) means:
+
+✅ “Always keep this pointing to the React object,
+❌ not the button”
+
+So:
+
+this.library works
+
+this.server works
+
+What if you REMOVE .bind(this) ❌
+addEventListener("click", this.handleClick)
+
+
+Then:
+
+this = button
+
+this.library → undefined
+
+this.server → undefined
+
+This is why bind() is required.
+
+Simple rule to remember 🧠
+
+👉 When passing a class method as a callback, this is lost
+👉 Use .bind(this) to fix it
+*/
         }
         handleClick(){
             console.log("Button clicked", this.liberary)
@@ -26,5 +89,10 @@
     }
 
     const app = new React()
+
+
+
+
+
 </script>
 </html>
