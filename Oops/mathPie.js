@@ -1,1 +1,1 @@
-Object_         
+Object.getOwnPropertyDescriptor
