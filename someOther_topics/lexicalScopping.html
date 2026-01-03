@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexical Scoping</title>
+</head>
+<body style="background-color: #313131;">
+    <p>Lexical Scoping Example</p>
+    <p>Lexical Scoping</p>
+    <p>Lexical scoping (or static scoping) is a rule in programming where variable visibility is determined by its physical location in the source code, meaning inner functions can access variables from their outer (parent) scopes </p>
+    <p>In JavaScript, lexical scoping is implemented through nested functions, where inner functions have access to variables defined in their outer functions. This allows for the creation of closures, enabling functions to retain access to their lexical scope even when executed outside of that scope.</p>
+    <p>Child functions can access parent variables , 
+Parent functions cannot access child variables , 
+Variables are accessible only inside their lexical (written) scope</p>
+
+</body>
+<script>
+  /*init() creates a local variable called name and a function called displayName(). 
+  The displayName() function is an inner function that is defined inside init() 
+  and is available only within the body of the init() function. Note that the displayName() function has no local variables
+   of its own. However, since inner functions have access to the variables of outer scopes, displayName() can access the variable
+    name declared in the parent function, init().*/
+
+  //  function init(){
+    //    let name = "Mozzila";
+      //  function displayName(){
+        //    console.log(name);
+       // }
+       // displayName();
+   // }
+   // init();
+
+
+
+   /*👉 In this example, child1 and child2 can access username because they are lexically inside the parent function. However, the parent function and the global scope cannot access variables defined inside child functions, which proves that JavaScript follows lexical scoping.*/
+
+
+
+
+
+
+
+   function parent(){ // parent function
+    let username = "aditya";
+    console.log("parent" , secret); // Error: secret is not defined
+    function child1(){ // child function
+      let secret = "my123"
+        console.log("child1",username); // can access variable of outer function
+    }  
+    function child2(){ // another child function
+      console.log("child2" , username); // can access variable of outer function
+      console.log("child2" , secret); // Error: secret is not defined
+    } 
+    child1(); // calling child function
+    child2(); // calling another child function
+}
+parent();// calling parent function
+console.log("too outer",username); // Error: username is not defined
+
+
+
+/*
+1️⃣ Why can child1 access username?
+
+Answer:
+Because child1 is defined inside parent, so it has access to the parent’s lexical scope.
+
+2️⃣ Why can’t parent access secret?
+
+Answer:
+Because lexical scoping does not allow outer scopes to access inner scope variables.
+
+3️⃣ Why can’t child2 access secret?
+
+Answer:
+Because secret is defined in child1, and sibling functions do not share scope.
+
+4️⃣ Does JavaScript decide scope at runtime?
+
+Answer:
+No. JavaScript decides scope at compile time based on code structure.
+
+🧠 One-line takeaway (memorize this)
+
+👉 Lexical scoping means a function can access variables from its parent scopes, but not from child or sibling scopes, and this is decided by where the code is written.
+*/
+
+</script>
+</html>

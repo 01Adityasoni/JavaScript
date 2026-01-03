@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closure</title>
+</head>
+<body style="background-color: rgb(40, 51, 20);">
+    <button id="orange">Orange</button>
+    <button id="blue">Blue</button>
+
+    <p>closure is a feature in JavaScript where an inner function remembers and can access variables from its outer (lexical) scope even after the outer function has finished executing.,,,
+
+
+A closure allows a function to retain access to its lexical scope even when the function is executed outside that scope.,
+
+
+Closures are created when a function is defined inside another function,
+
+The inner function retains access to outer variables,
+
+Closure exists because of lexical scoping,
+
+Used for data hiding, callbacks, and event handlers
+
+
+    </p>
+    
+</body>
+<script>
+    // function makeFunc(){
+       // const name = "Mozilla";
+      //  function displayName(){
+        //    console.log(name);
+      //  }
+     //   return displayName;
+   // }
+  //  const myFunc = makeFunc();
+  //  myFunc();
+
+
+
+
+
+
+  //document.getElementById("orange").addEventListener("click", function(){
+    //  document.body.style.backgroundColor = "orange";
+  //});
+  //document.getElementById("blue").addEventListener("click", function(){
+    //  document.body.style.backgroundColor = "blue";
+  //});
+
+
+
+  /*Why this is a Closure (important)
+
+A closure is created when:
+
+A function is returned
+
+The returned function uses variables from its parent scope
+
+Here:
+
+Inner function uses color
+
+color belongs to clickHandler
+
+clickHandler is already finished
+✅ Still works → closure
+
+
+Lexical scoping + closure connection
+
+Lexical scoping decides what variables are accessible
+
+Closure allows those variables to be remembered
+
+👉 Closure exists because of lexical scoping
+
+
+
+1️⃣ What is a closure?
+
+Answer:
+A closure is a function that remembers variables from its lexical scope even after the outer function has finished execution.
+
+2️⃣ Where is closure used in this code?
+
+Answer:
+The returned function inside clickHandler forms a closure over the color variable.
+
+3️⃣ Why does color not get destroyed?
+
+Answer:
+Because the inner function still references it, so JavaScript keeps it in memory.
+
+4️⃣ Is closure created every time a function is returned?
+
+Answer:
+Yes, if the inner function uses variables from its outer scope.
+
+5️⃣ Is this a real-world use of closure?
+
+Answer:
+Yes. Closures are used in:
+
+Event handlers
+
+Callbacks
+
+Data privacy
+
+React hooks
+
+Module patterns
+
+6️⃣ Why not write the color directly inside onclick?
+
+Answer:
+Using closure makes the code:
+
+Reusable
+
+Cleaner
+
+Scalable
+
+7️⃣ Difference between lexical scope and closure?
+Lexical Scope	Closure
+Scope rule	Feature
+Decides access	Remembers values
+Compile time	Runtime behavior
+8️⃣ Can closures cause memory leaks?
+
+Answer:
+Yes, if large objects are captured and not released properly.
+
+🧠 One-line summary (memorize this)
+
+👉 A closure is created when an inner function remembers and uses variables from its outer function even after the outer function has finished executing.
+
+
+
+
+
+*/
+
+
+  function clickHandler(color){
+   // document.body.style.backgroundColor = `${color}`;
+
+  return function(){
+    document.body.style.backgroundColor = `${color}`;
+   }
+  }
+
+  document.getElementById("orange").onclick = clickHandler("orange")
+  document.getElementById("blue").onclick = clickHandler("blue")
+
+</script>
+</html>
